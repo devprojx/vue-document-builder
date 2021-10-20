@@ -51,7 +51,7 @@ export default Vue.extend({
 
 <template>
   <div id="app">
-    <vue-document-builder :options="options" :blocks="blocks" @save="onSave" />
+    <vue-document-builder :blocks="blocks" @save="onSave" />
   </div>
 </template>
 <style>
