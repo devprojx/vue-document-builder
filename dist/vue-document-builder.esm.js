@@ -84,7 +84,7 @@ const DEFAULT_OPTIONS = {
       widthMedia: "992px"
     }]
   },
-  plugins: []
+  plugins: ["gjs-document-creator-preset"]
 };
 var script = {
   name: "VueDocumentBuilder",
@@ -112,13 +112,14 @@ var script = {
     //Set default options
     for (const key in DEFAULT_OPTIONS) {
       if (key == "plugins" && this.options[key] && Array.isArray(this.options[key])) {
-        this.options[key] = [editor => this.documentCreatorPresetPlugin(editor)].concat(this.options[key]);
+        this.options[key] = DEFAULT_OPTIONS[key].concat(this.options[key]);
       }
 
       if (!this.options[key]) this.options[key] = DEFAULT_OPTIONS[key];
     } //Initialize editor
 
 
+    grapes_min$1.plugins.add("gjs-document-creator-preset", this.documentCreatorPresetPlugin);
     this.editor = grapes_min$1.init({ ...this.options,
       container: "#gjs"
     });
@@ -463,7 +464,7 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-49fed320_0", {
+  inject("data-v-0a4c1764_0", {
     source: ".gjs-search{border:2px solid #9ca8bb;border-radius:0;height:20px;width:100%;padding:16px 5px 16px 10px;outline:0;color:#fff;background-color:transparent}.gjs-search::placeholder{color:#9ca8bb;opacity:1}.gjs-one-bg{background-color:#242a3b}.gjs-two-color{color:#9ca8bb}.gjs-three-bg{background-color:#1e8fe1!important;color:#fff}.gjs-four-color,.gjs-four-color-h:hover{color:#1e8fe1!important}",
     map: undefined,
     media: undefined

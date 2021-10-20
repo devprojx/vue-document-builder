@@ -34,7 +34,7 @@ const DEFAULT_OPTIONS = {
       },
     ],
   },
-  plugins: [],
+  plugins: ["gjs-document-creator-preset"],
 };
 
 export default {
@@ -69,14 +69,16 @@ export default {
         this.options[key] &&
         Array.isArray(this.options[key])
       ) {
-        this.options[key] = [
-          (editor) => this.documentCreatorPresetPlugin(editor),
-        ].concat(this.options[key]);
+        this.options[key] = DEFAULT_OPTIONS[key].concat(this.options[key]);
       }
       if (!this.options[key]) this.options[key] = DEFAULT_OPTIONS[key];
     }
 
     //Initialize editor
+    grapesjs.plugins.add(
+      "gjs-document-creator-preset",
+      this.documentCreatorPresetPlugin
+    );
     this.editor = grapesjs.init({ ...this.options, container: "#gjs" });
     window.addEventListener("gjs-save-doc", (evt) => {
       this.$emit("save", evt.detail);
