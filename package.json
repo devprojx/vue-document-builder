@@ -20,7 +20,12 @@
     "dist/*",
     "src/**/*.vue"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "grapesjs": "^0.17.27",
+    "grapesjs-page-break": "^0.2.0",
+    "grapesjs-preset-newsletter": "^0.2.21",
+    "grapesjs-rte-extensions": "^1.0.7"
+  },
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.7",
