@@ -268,6 +268,7 @@ var script = {
     for (var key in DEFAULT_OPTIONS) {
       if (key == "plugins" && this.options[key] && Array.isArray(this.options[key])) {
         this.options[key] = DEFAULT_OPTIONS[key].concat(this.options[key]);
+        continue;
       }
 
       if (!this.options[key]) this.options[key] = DEFAULT_OPTIONS[key];
@@ -285,15 +286,8 @@ var script = {
   methods: {
     documentCreatorPresetPlugin: function documentCreatorPresetPlugin(editor) {
       var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var config = opts; //load plugins
-
-      grapesjsPresetNewsletter_min(editor, {
-        categoryLabel: "Basic"
-      });
-      grapesjsPageBreak_min(editor, {
-        category: "Basic"
-      });
-      grapesjsRteExtensions_min(editor, {
+      var config = opts;
+      var rteOptions = {
         base: {
           bold: true,
           italic: true,
@@ -322,7 +316,42 @@ var script = {
         extra: false,
         darkColorPicker: true,
         maxWidth: "600px"
-      });
+      }; //load plugins and check if ESM module when transpile by rollup
+
+      if (grapesjsPresetNewsletter_min.hasOwnProperty("default")) {
+        var plugin = grapesjsPresetNewsletter_min.default;
+        console.log("pluginNewsletter", plugin, grapesjsPageBreak_min.default);
+        plugin(editor, {
+          categoryLabel: "Basic"
+        });
+      } else {
+        grapesjsPresetNewsletter_min(editor, {
+          categoryLabel: "Basic"
+        });
+      }
+
+      if (grapesjsPageBreak_min.hasOwnProperty("default")) {
+        var _plugin = grapesjsPageBreak_min.default;
+        console.log("pluginPageBreak", _plugin);
+
+        _plugin(editor, {
+          category: "Basic"
+        });
+      } else {
+        grapesjsPageBreak_min(editor, {
+          category: "Basic"
+        });
+      }
+
+      if (grapesjsRteExtensions_min.hasOwnProperty("default")) {
+        var _plugin2 = grapesjsRteExtensions_min.default;
+        console.log("pluginRTE", _plugin2);
+
+        _plugin2(editor, rteOptions);
+      } else {
+        grapesjsRteExtensions_min(editor, rteOptions);
+      }
+
       this.initPanels(editor, config);
       this.searchPlugin(editor);
       this.initCommands(editor, config);
@@ -633,7 +662,7 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-0a4c1764_0", {
+  inject("data-v-35e3fbac_0", {
     source: ".gjs-search{border:2px solid #9ca8bb;border-radius:0;height:20px;width:100%;padding:16px 5px 16px 10px;outline:0;color:#fff;background-color:transparent}.gjs-search::placeholder{color:#9ca8bb;opacity:1}.gjs-one-bg{background-color:#242a3b}.gjs-two-color{color:#9ca8bb}.gjs-three-bg{background-color:#1e8fe1!important;color:#fff}.gjs-four-color,.gjs-four-color-h:hover{color:#1e8fe1!important}",
     map: undefined,
     media: undefined
@@ -645,7 +674,7 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 var __vue_scope_id__ = undefined;
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-0a4c1764";
+var __vue_module_identifier__ = "data-v-35e3fbac";
 /* functional template */
 
 var __vue_is_functional_template__ = false;

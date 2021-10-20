@@ -1,6 +1,6 @@
 {
   "name": "vue-document-builder",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "",
   "author": "Yanik Black",
   "scripts": {
@@ -39,10 +39,13 @@
     "@vue/cli-service": "^4.5.13",
     "@vue/test-utils": "^1.2.2",
     "cross-env": "^7.0.3",
+    "eslint": "^8.0.1",
+    "eslint-plugin-vue": "^7.20.0",
     "import": "0.0.6",
     "minimist": "^1.2.5",
     "rimraf": "^3.0.2",
     "rollup": "^2.52.8",
+    "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-scss": "^3.0.0",
     "rollup-plugin-terser": "^7.0.2",

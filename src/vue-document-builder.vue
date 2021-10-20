@@ -70,6 +70,7 @@ export default {
         Array.isArray(this.options[key])
       ) {
         this.options[key] = DEFAULT_OPTIONS[key].concat(this.options[key]);
+        continue;
       }
       if (!this.options[key]) this.options[key] = DEFAULT_OPTIONS[key];
     }
@@ -87,13 +88,7 @@ export default {
   methods: {
     documentCreatorPresetPlugin(editor, opts = {}) {
       let config = opts;
-
-      //load plugins
-      pluginNewsletter(editor, {
-        categoryLabel: "Basic",
-      });
-      pluginPageBreak(editor, { category: "Basic" });
-      pluginRTE(editor, {
+      const rteOptions = {
         base: {
           bold: true,
           italic: true,
@@ -122,7 +117,38 @@ export default {
         extra: false,
         darkColorPicker: true,
         maxWidth: "600px",
-      });
+      };
+
+      //load plugins and check if ESM module when transpile by rollup
+      if (pluginNewsletter.hasOwnProperty("default")) {
+        const plugin = pluginNewsletter.default;
+        console.log("pluginNewsletter", plugin, pluginPageBreak.default);
+        plugin(editor, {
+          categoryLabel: "Basic",
+        });
+      } else {
+        pluginNewsletter(editor, {
+          categoryLabel: "Basic",
+        });
+      }
+
+      if (pluginPageBreak.hasOwnProperty("default")) {
+        const plugin = pluginPageBreak.default;
+        console.log("pluginPageBreak", plugin);
+        plugin(editor, {
+          category: "Basic",
+        });
+      } else {
+        pluginPageBreak(editor, { category: "Basic" });
+      }
+
+      if (pluginRTE.hasOwnProperty("default")) {
+        const plugin = pluginRTE.default;
+        console.log("pluginRTE", plugin);
+        plugin(editor, rteOptions);
+      } else {
+        pluginRTE(editor, rteOptions);
+      }
 
       this.initPanels(editor, config);
       this.searchPlugin(editor);
@@ -160,6 +186,7 @@ export default {
         panelNode.prepend(searchInput);
       }, 1000);
     },
+
     initCommands(editor) {
       const viewPanel = [...editor.Panels.getPanel("views").btn];
 

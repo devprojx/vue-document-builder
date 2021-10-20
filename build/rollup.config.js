@@ -7,6 +7,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import babel from "@rollup/plugin-babel";
+import copy from "rollup-plugin-copy";
 import { terser } from "rollup-plugin-terser";
 import minimist from "minimist";
 import scss from "rollup-plugin-scss";
@@ -86,7 +87,7 @@ if (!argv.format || argv.format === "es") {
 		external,
 		output: {
 			file: "dist/vue-document-builder.esm.js",
-			format: "esm",
+			format: "cjs",
 			exports: "named",
 		},
 		plugins: [
@@ -106,6 +107,9 @@ if (!argv.format || argv.format === "es") {
 						},
 					],
 				],
+			}),
+			copy({
+				targets: [{ src: ["node_modules/grapesjs/dist/fonts/**"], dest: "fonts" }],
 			}),
 		],
 	};

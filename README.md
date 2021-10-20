@@ -13,7 +13,8 @@ yarn add vue-document-builder
 ```js
 <script>
 import Vue from "vue";
-import VueDocumentBuilder from "@/vue-document-builder.vue";
+import VueDocumentBuilder from "vue-document-builder";
+import "vue-document-builder/dist/vue-document-builder.min.css";
 
 export default Vue.extend({
   name: "ServeDev",

@@ -1,3 +1,7 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 function createCommonjsModule(fn, basedir, module) {
@@ -113,6 +117,7 @@ var script = {
     for (const key in DEFAULT_OPTIONS) {
       if (key == "plugins" && this.options[key] && Array.isArray(this.options[key])) {
         this.options[key] = DEFAULT_OPTIONS[key].concat(this.options[key]);
+        continue;
       }
 
       if (!this.options[key]) this.options[key] = DEFAULT_OPTIONS[key];
@@ -130,15 +135,8 @@ var script = {
 
   methods: {
     documentCreatorPresetPlugin(editor, opts = {}) {
-      let config = opts; //load plugins
-
-      grapesjsPresetNewsletter_min(editor, {
-        categoryLabel: "Basic"
-      });
-      grapesjsPageBreak_min(editor, {
-        category: "Basic"
-      });
-      grapesjsRteExtensions_min(editor, {
+      let config = opts;
+      const rteOptions = {
         base: {
           bold: true,
           italic: true,
@@ -167,7 +165,40 @@ var script = {
         extra: false,
         darkColorPicker: true,
         maxWidth: "600px"
-      });
+      }; //load plugins and check if ESM module when transpile by rollup
+
+      if (grapesjsPresetNewsletter_min.hasOwnProperty("default")) {
+        const plugin = grapesjsPresetNewsletter_min.default;
+        console.log("pluginNewsletter", plugin, grapesjsPageBreak_min.default);
+        plugin(editor, {
+          categoryLabel: "Basic"
+        });
+      } else {
+        grapesjsPresetNewsletter_min(editor, {
+          categoryLabel: "Basic"
+        });
+      }
+
+      if (grapesjsPageBreak_min.hasOwnProperty("default")) {
+        const plugin = grapesjsPageBreak_min.default;
+        console.log("pluginPageBreak", plugin);
+        plugin(editor, {
+          category: "Basic"
+        });
+      } else {
+        grapesjsPageBreak_min(editor, {
+          category: "Basic"
+        });
+      }
+
+      if (grapesjsRteExtensions_min.hasOwnProperty("default")) {
+        const plugin = grapesjsRteExtensions_min.default;
+        console.log("pluginRTE", plugin);
+        plugin(editor, rteOptions);
+      } else {
+        grapesjsRteExtensions_min(editor, rteOptions);
+      }
+
       this.initPanels(editor, config);
       this.searchPlugin(editor);
       this.initCommands(editor, config);
@@ -464,7 +495,7 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-0a4c1764_0", {
+  inject("data-v-35e3fbac_0", {
     source: ".gjs-search{border:2px solid #9ca8bb;border-radius:0;height:20px;width:100%;padding:16px 5px 16px 10px;outline:0;color:#fff;background-color:transparent}.gjs-search::placeholder{color:#9ca8bb;opacity:1}.gjs-one-bg{background-color:#242a3b}.gjs-two-color{color:#9ca8bb}.gjs-three-bg{background-color:#1e8fe1!important;color:#fff}.gjs-four-color,.gjs-four-color-h:hover{color:#1e8fe1!important}",
     map: undefined,
     media: undefined
@@ -508,4 +539,4 @@ var entry_esm = /*#__PURE__*/(() => {
 // also be used as directives, etc. - eg. import { RollupDemoDirective } from 'rollup-demo';
 // export const RollupDemoDirective = directive;
 
-export { entry_esm as default };
+exports["default"] = entry_esm;
