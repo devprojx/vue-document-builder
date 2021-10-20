@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/devprojx/vue-document-builder/compare/v1.0.1...v1.0.2) (2021-10-20)
+
+
+### Bug Fixes
+
+* **vue-document-builder:** fixed default plugin not loading ([65f9461](https://github.com/devprojx/vue-document-builder/commit/65f9461709e466c44bf70badd8fd03af7e182e32))
+
 ## [1.0.1](https://github.com/devprojx/vue-document-builder/compare/v1.0.0...v1.0.1) (2021-10-20)
 
 
