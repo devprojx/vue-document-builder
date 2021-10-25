@@ -8,6 +8,7 @@ import grapesjs from "grapesjs";
 import pluginNewsletter from "grapesjs-preset-newsletter";
 import pluginPageBreak from "grapesjs-page-break";
 import pluginRTE from "grapesjs-rte-extensions";
+import pluginTable from "grapesjs-table";
 
 const DEFAULT_OPTIONS = {
   width: "auto",
@@ -148,6 +149,14 @@ export default {
         plugin(editor, rteOptions);
       } else {
         pluginRTE(editor, rteOptions);
+      }
+
+      if (pluginTable.hasOwnProperty("default")) {
+        const plugin = pluginTable.default;
+        console.log("pluginTable", plugin);
+        plugin(editor, rteOptions);
+      } else {
+        pluginTable(editor, rteOptions);
       }
 
       this.initPanels(editor, config);

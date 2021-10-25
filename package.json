@@ -24,7 +24,8 @@
     "grapesjs": "^0.17.27",
     "grapesjs-page-break": "^0.2.0",
     "grapesjs-preset-newsletter": "^0.2.21",
-    "grapesjs-rte-extensions": "^1.0.7"
+    "grapesjs-rte-extensions": "^1.0.7",
+    "grapesjs-table": "^1.0.8"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
