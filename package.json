@@ -18,7 +18,8 @@
   "unpkg": "dist/vue-document-builder.min.js",
   "files": [
     "dist/*",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "fonts/*"
   ],
   "dependencies": {
     "grapesjs": "^0.17.27",
