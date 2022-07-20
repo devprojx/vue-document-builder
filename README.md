@@ -1,4 +1,4 @@
-# gjs-template-filler
+# vue-document-builder
 
 ### Installation
 
